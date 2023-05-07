@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Loop App</title>
+  <link rel="stylesheet" href="css/stylesheet.css">
+  <script src="//cdn.jsdelivr.net/npm/gsap@3.7.0/dist/gsap.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/gsap@3.7.0/dist/ScrollTrigger.min.js"></script>
+  <script type="module" src="js/main.js" defer></script>
+</head>
+
+<body onselectstart="return false;" onmousedown="return false;">
+
+  <div class="top">
+    <button id="modeButton" class="normal">mode:
+      <span id="mode">normal</span>
+    </button>
+    <div id="counts">
+      <span>Count:</span>
+      <p id="Counter">0</p>
+    </div>
+    <label class="open" for="popup">素材提供元</label>
+    <input type="checkbox" id="popup">
+    <div class="gray">
+      <div class="window">
+        <label class="close" for="popup">☓</label>
+        <h4 class="title">クレジット</h4>
+        <p>・効果音提供<br>オトロジック(https://otologic.jp)<br><br>
+          ・画像提供<br>photoAC(https://www.photo-ac.com/)
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <section id="firstPuchi"></section>
+
+  </div>
+</body>
+
+</html>
