@@ -1,0 +1,22 @@
+name: upload S3
+on:
+  push:
+      branches:
+        - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main  # リポジトリをチェックアウト
+
+      - name: Deploy  # S3にデプロイ 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+        run: # S3バケットにデプロイ
+          aws s3 cp --region ap-northeast-1 index.html "$S3_BUCKET_NAME" &&
+          aws s3 cp --recursive --region ap-northeast-1 css "$S3_BUCKET_NAME"'/css'  &&
+          aws s3 cp --recursive --region ap-northeast-1 js "$S3_BUCKET_NAME"'/js' &&
+          aws s3 cp --recursive --region ap-northeast-1 src "$S3_BUCKET_NAME"'/src'
