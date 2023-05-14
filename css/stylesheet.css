@@ -3,6 +3,11 @@
   padding: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: "游明朝","Yu Mincho";
   font-weight: bold;
