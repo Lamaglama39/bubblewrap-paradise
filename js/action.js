@@ -3,7 +3,6 @@ import { imgPath, puchiImg } from "./path.js";
 
 // プチプチ状態判定
 function handleClick(e, eventType) {
-  e.stopPropagation();
   let circle = e.target;
   if (circle.classList.contains("alive")) {
     popSound();
@@ -11,8 +10,10 @@ function handleClick(e, eventType) {
     addCount();
   }
   if (eventType === "touchmove") {
+    console.log(eventType)
     circle.removeEventListener("touchmove", handleClick, true);
   } else {
+    console.log(eventType)
     circle.removeEventListener("mousemove", handleClick, true);
   }
 }
@@ -24,9 +25,9 @@ async function PushPuchi(device) {
     let mode = document.getElementById("modeButton");
     // タッチデバイスの場合
     if (device === "touch") {
-      const handleClickWrapper = (e) => handleClick(e, mode.classList.contains("normal") ? "ontouchstart" : "touchmove");
+      const handleClickWrapper = (e) => handleClick(e, mode.classList.contains("normal") ? "touchstart" : "touchmove");
       if (mode.classList.contains("normal")) {
-        circle.addEventListener("ontouchstart", handleClickWrapper, true);
+        circle.addEventListener("touchstart", handleClickWrapper, true);
       } else {
         circle.addEventListener("touchmove", handleClickWrapper, true);
       }
@@ -75,8 +76,8 @@ async function clickStyle(device) {
         let circles = Array.from(document.querySelectorAll(".alive"));
         circles.forEach((circle) => {
           circle.removeEventListener(
-            "ontouchstart",
-            (e) => handleClick(e, "ontouchstart"),
+            "touchstart",
+            (e) => handleClick(e, "touchstart"),
             true
           );
         });
@@ -91,7 +92,7 @@ async function clickStyle(device) {
           if (modeButton.classList.contains("normal")) {
             circle.removeEventListener("touchmove", circle.handleClickWrapper, true); // 以前に保存した関数を使用
           } else {
-            circle.removeEventListener("ontouchstart", circle.handleClickWrapper, true); // 以前に保存した関数を使用
+            circle.removeEventListener("touchstart", circle.handleClickWrapper, true); // 以前に保存した関数を使用
           }
         });
         PushPuchi(device);
