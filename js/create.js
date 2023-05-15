@@ -3,34 +3,65 @@ import { PushPuchi } from "./action.js";
 import { imgPath, puchiImg } from "./path.js";
 
 // プチプチシート作成
-async function CreatePuchi(id) {
-  for (let i = 0; i <= 20; i++) {
-    let parentElement = document.getElementById(id);
-    const newElementLight = document.createElement("div");
-    newElementLight.classList = "light";
-    for (let i = 0; i <= 24; i++) {
-      const newImg = document.createElement("img");
-      newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
-      newImg.classList.add("alive");
-      newImg.id = "puchi" + i;
-      newElementLight.appendChild(newImg);
+async function CreatePuchi(id, device) {
+  if(device === "touch") {
+    for (let i = 0; i <= 20; i++) {
+      let parentElement = document.getElementById(id);
+      const newElementLight = document.createElement("div");
+      newElementLight.classList = "light-m";
+      for (let i = 0; i <= 6; i++) {
+        const newImg = document.createElement("img");
+        newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
+        newImg.classList.add("alive");
+        newImg.id = "puchi" + i;
+        newImg.classList.add("mobile");
+        newElementLight.appendChild(newImg);
+      }
+      parentElement.appendChild(newElementLight);
+  
+      const newElementLeft = document.createElement("div");
+      newElementLeft.classList = "left-m";
+      for (let i = 0; i <= 6; i++) {
+        const newImg = document.createElement("img");
+        newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
+        newImg.classList.add("alive");
+        newImg.id = "puchi" + i;
+        newImg.classList.add("mobile");
+        newElementLeft.appendChild(newImg);
+      }
+      parentElement.appendChild(newElementLeft);
     }
-    parentElement.appendChild(newElementLight);
-
-    const newElementLeft = document.createElement("div");
-    newElementLeft.classList = "left";
-    for (let i = 0; i <= 23; i++) {
-      const newImg = document.createElement("img");
-      newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
-      newImg.classList.add("alive");
-      newImg.id = "puchi" + i;
-      newElementLeft.appendChild(newImg);
+  } else {
+    for (let i = 0; i <= 20; i++) {
+      let parentElement = document.getElementById(id);
+      const newElementLight = document.createElement("div");
+      newElementLight.classList = "light-d";
+      for (let i = 0; i <= 24; i++) {
+        const newImg = document.createElement("img");
+        newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
+        newImg.classList.add("alive");
+        newImg.id = "puchi" + i;
+        newImg.classList.add("desktop");
+        newElementLight.appendChild(newImg);
+      }
+      parentElement.appendChild(newElementLight);
+  
+      const newElementLeft = document.createElement("div");
+      newElementLeft.classList = "left-d";
+      for (let i = 0; i <= 23; i++) {
+        const newImg = document.createElement("img");
+        newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
+        newImg.classList.add("alive");
+        newImg.id = "puchi" + i;
+        newImg.classList.add("desktop");
+        newElementLeft.appendChild(newImg);
+      }
+      parentElement.appendChild(newElementLeft);
     }
-    parentElement.appendChild(newElementLeft);
   }
 }
 
-function scrollPages() {
+function scrollPages(device) {
   gsap.registerPlugin(ScrollTrigger);
 
   const container = document.querySelector(".container"); //コンテナ要素を取得して代入
@@ -43,9 +74,9 @@ function scrollPages() {
     // section.appendChild(h1);// セクション要素の中に追加
     section.setAttribute("id", `Puchi${index + 1}`);
     // h1.innerHTML = `セクション${index+1}`;// テキスト挿入
-    CreatePuchi(`Puchi${index + 1}`);
+    CreatePuchi(`Puchi${index + 1}`, device);
     rustleSound();
-    PushPuchi();
+    PushPuchi(device);
   };
 
   ScrollTrigger.create({

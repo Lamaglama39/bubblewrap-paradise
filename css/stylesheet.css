@@ -60,10 +60,6 @@ button {
   justify-content: flex-end;
 }
 
-#firstPuchi {
-  margin-top: 15vh;
-}
-
 .section {
   width: 100%;
   color: white;
@@ -82,21 +78,39 @@ button {
   border-radius: 1%;
 }
 
-.light {
+.light-m {
+  margin: 0 -3.9vw;
+  display: flex;
+}
+
+.left-m {
+  margin: 0 4.8vw;
+  display: flex;
+}
+
+.light-d {
   margin: 0 -1.3vw;
   display: flex;
 }
 
-.left {
+.left-d {
   margin: 0 1.6vw;
   display: flex;
 }
 
-img {
+.desktop {
   width: 5vw;
   height: 5vw;
   border-radius: 50%;
-  margin: 0vw 0.35vw 0vw 0.35vw;
+  margin: -0.13vw 0.35vw -0.13vw 0.35vw;
+  border: 1px solid darkgray;
+}
+
+.mobile {
+  width: 15vw;
+  height: 15vw;
+  border-radius: 50%;
+  margin: -0.5vw 0.69vw -0.5vw 0.69vw;
   border: 1px solid darkgray;
 }
 
