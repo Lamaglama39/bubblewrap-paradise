@@ -18,6 +18,7 @@ body {
   align-items: center;
   height: 100%;
   width: 100vw;
+  user-select: none;
 }
 
 body::-webkit-scrollbar{
@@ -45,7 +46,7 @@ button {
   font-family: "游明朝","Yu Mincho";
   font-weight: bold;
   text-align: center;
-  width: 18vw;
+  width: 20vw;
   margin-left: auto;
   font-size: 2vw;
   margin: 1vw;
@@ -125,7 +126,7 @@ img:active {
 .open {
   border: 0.2vw solid black;
   text-align: center;
-  width: 18vw;
+  width: 20vw;
   font-size: 2vw;
   margin: 1vw;
   border-radius: 2vw;
@@ -152,11 +153,13 @@ img:active {
   background: rgba(0, 0, 0, 0.6);
 }
 .window {
+  text-align: center;
   position: fixed;
   top: 50%;
   left: 50%;
   padding: 3vw;
-  height: 30vh;
+  height: 25vh;
+  width: 40vw;
   background-color: #fff;
   border-radius: 2vw;
   align-items: center;
@@ -166,9 +169,12 @@ img:active {
 .title {
   color: #e83015;
   margin-bottom: 2vw;
-  font-size: 3vh;
+  font-size: 2vh;
   padding-bottom: 1vw;
   border-bottom: #e83015 0.2vw solid;
+}
+.window p {
+  font-size: 1.5vw;
 }
 .close {
   position: absolute;
