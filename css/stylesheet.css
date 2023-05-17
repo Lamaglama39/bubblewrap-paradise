@@ -67,9 +67,15 @@ button {
   margin: 0 auto;
 }
 
+section {
+  background: linear-gradient(
+  rgba(255, 255, 255, 0.856),
+  rgba(230, 230, 230, 0.822),
+  rgba(255, 255, 255, 0.856),
+  rgba(230, 230, 230, 0.822),
+  rgba(255, 255, 255, 0.856));
+}
 .container {
-  background-image: url("../src/img/background.png");
-  background-color: rgba(255, 255, 255, 0.192);
   background-blend-mode:lighten;
   display: flex;
   justify-content: center;
@@ -104,7 +110,7 @@ button {
   height: 5vw;
   border-radius: 50%;
   margin: -0.13vw 0.35vw -0.13vw 0.35vw;
-  border: 1px solid darkgray;
+  border: 0.5px solid rgba(169, 169, 169, 0.041);
 }
 
 .mobile {
@@ -112,7 +118,7 @@ button {
   height: 15vw;
   border-radius: 50%;
   margin: -0.5vw 0.69vw -0.5vw 0.69vw;
-  border: 1px solid darkgray;
+  border: 0.5px solid rgba(169, 169, 169, 0.041);
 }
 
 .alive {
