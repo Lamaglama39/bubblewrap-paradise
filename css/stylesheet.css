@@ -18,7 +18,10 @@ body {
   align-items: center;
   height: 100%;
   width: 100vw;
-  user-select: none;
+  user-select: none; /* CSS3 */
+  -moz-user-select: none; /* Firefox */
+  -webkit-user-select: none; /* Safari、Chrome */
+  -ms-user-select: none; /* IE10 */
 }
 
 body::-webkit-scrollbar{
@@ -128,7 +131,14 @@ section {
 img:active {
   pointer-events: active;
 }
-
+img {
+	    /* SPの長押し禁止 */
+      -webkit-touch-callout:none;
+      -webkit-user-select:none;
+      -moz-touch-callout:none;
+      -moz-user-select:none;
+      user-select:none;
+}
 .open {
   border: 0.2vw solid black;
   text-align: center;
