@@ -2,65 +2,43 @@ import { rustleSound } from "./sound.js";
 import { PushPuchi } from "./action.js";
 import { imgPath, puchiImg } from "./path.js";
 
-// プチプチシート作成
+// ぷちぷち作成
 async function CreatePuchi(id, device) {
-  if(device === "touch") {
-    for (let i = 0; i <= 20; i++) {
-      let parentElement = document.getElementById(id);
-      const newElementLight = document.createElement("div");
-      newElementLight.classList = "light-m";
-      for (let i = 0; i <= 6; i++) {
-        const newImg = document.createElement("img");
-        newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
-        newImg.classList.add("alive");
-        newImg.id = "puchi" + i;
-        newImg.classList.add("mobile");
-        newElementLight.appendChild(newImg);
-      }
-      parentElement.appendChild(newElementLight);
-  
-      const newElementLeft = document.createElement("div");
-      newElementLeft.classList = "left-m";
-      for (let i = 0; i <= 6; i++) {
-        const newImg = document.createElement("img");
-        newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
-        newImg.classList.add("alive");
-        newImg.id = "puchi" + i;
-        newImg.classList.add("mobile");
-        newElementLeft.appendChild(newImg);
-      }
-      parentElement.appendChild(newElementLeft);
+  const isTouchDevice = device === "touch";
+  const repetitions = isTouchDevice ? 6 : 24;
+  const lightClass = isTouchDevice ? "light-m" : "light-d";
+  const leftClass = isTouchDevice ? "left-m" : "left-d";
+  const imgClass = isTouchDevice ? "mobile" : "desktop";
+
+  for (let i = 0; i <= 20; i++) {
+    let parentElement = document.getElementById(id);
+
+    const newElementLight = document.createElement("div");
+    newElementLight.classList = lightClass;
+    for (let i = 0; i <= repetitions; i++) {
+      const newImg = document.createElement("img");
+      newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)];
+      newImg.classList.add("alive");
+      newImg.classList.add(imgClass);
+      newElementLight.appendChild(newImg);
     }
-  } else {
-    for (let i = 0; i <= 20; i++) {
-      let parentElement = document.getElementById(id);
-      const newElementLight = document.createElement("div");
-      newElementLight.classList = "light-d";
-      for (let i = 0; i <= 24; i++) {
-        const newImg = document.createElement("img");
-        newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
-        newImg.classList.add("alive");
-        newImg.id = "puchi" + i;
-        newImg.classList.add("desktop");
-        newElementLight.appendChild(newImg);
-      }
-      parentElement.appendChild(newElementLight);
-  
-      const newElementLeft = document.createElement("div");
-      newElementLeft.classList = "left-d";
-      for (let i = 0; i <= 23; i++) {
-        const newImg = document.createElement("img");
-        newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)] 
-        newImg.classList.add("alive");
-        newImg.id = "puchi" + i;
-        newImg.classList.add("desktop");
-        newElementLeft.appendChild(newImg);
-      }
-      parentElement.appendChild(newElementLeft);
+    parentElement.appendChild(newElementLight);
+
+    const newElementLeft = document.createElement("div");
+    newElementLeft.classList = leftClass;
+    for (let i = 0; i <= repetitions; i++) {
+      const newImg = document.createElement("img");
+      newImg.src = imgPath + puchiImg[Math.floor(Math.random() * puchiImg.length)];
+      newImg.classList.add("alive");
+      newImg.classList.add(imgClass);
+      newElementLeft.appendChild(newImg);
     }
+    parentElement.appendChild(newElementLeft);
   }
 }
 
+
+// スクロール時のページ作成
 function scrollPages(device) {
   gsap.registerPlugin(ScrollTrigger);
 
