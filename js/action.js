@@ -1,5 +1,4 @@
 import { popSound } from "./sound.js";
-import { imgPath, puchiImg } from "./path.js";
 
 // プチプチ状態判定
 function handleClick(e, eventType) {
@@ -10,44 +9,36 @@ function handleClick(e, eventType) {
     addCount();
   }
   if (eventType === "touchmove") {
-    console.log(eventType)
     circle.removeEventListener("touchmove", handleClick, true);
   } else {
-    console.log(eventType)
     circle.removeEventListener("mousemove", handleClick, true);
   }
 }
 
 // プチプチ時のクリックイベント
 async function PushPuchi(device) {
+  const eventTypes =
+    device === "touch" ? ["touchstart", "touchmove"] : ["click", "mousemove"];
   let circles = Array.from(document.querySelectorAll(".alive"));
+
   circles.forEach((circle) => {
     let mode = document.getElementById("modeButton");
-    // タッチデバイスの場合
-    if (device === "touch") {
-      const handleClickWrapper = (e) => handleClick(e, mode.classList.contains("normal") ? "touchstart" : "touchmove");
-      if (mode.classList.contains("normal")) {
-        circle.addEventListener("touchstart", handleClickWrapper, true);
-      } else {
-        circle.addEventListener("touchmove", handleClickWrapper, true);
-      }
-      circle.handleClickWrapper = handleClickWrapper; // 保持するために新しいプロパティに関数を保存
-    } else {
-      // タッチデバイスではない場合
-      const handleClickWrapper = (e) => handleClick(e, mode.classList.contains("normal") ? "click" : "mousemove");
-      if (mode.classList.contains("normal")) {
-        circle.addEventListener("click", handleClickWrapper, true);
-      } else {
-        circle.addEventListener("mousemove", handleClickWrapper, true);
-      }
-      circle.handleClickWrapper = handleClickWrapper; // 保持するために新しいプロパティに関数を保存
-    }
+    const handleClickWrapper = (e) =>
+      handleClick(
+        e,
+        mode.classList.contains("normal") ? eventTypes[0] : eventTypes[1]
+      );
+    circle.addEventListener(
+      mode.classList.contains("normal") ? eventTypes[0] : eventTypes[1],
+      handleClickWrapper,
+      true
+    );
+    circle.handleClickWrapper = handleClickWrapper; // 保持するために新しいプロパティに関数を保存
   });
 }
 
 // プチプチ画像置き換え
 async function change(circle) {
-  // circle.src = "src/img/puchi-back.png";
   circle.src = "src/img/background.png";
   circle.classList.remove("alive");
 }
@@ -62,74 +53,48 @@ async function addCount() {
 
 // 単発-連射モード切り替え
 async function clickStyle(device) {
+  const eventTypes =
+    device === "touch" ? ["touchstart", "touchmove"] : ["click", "mousemove"];
   let modeButton = document.getElementById("modeButton");
   let mode = document.getElementById("mode");
 
   modeButton.addEventListener("click", () => {
-    // タッチデバイスの場合
-    if(device === "touch"){
-      if (modeButton.classList.contains("normal")) {
-        modeButton.classList.remove("normal");
-        modeButton.classList.add("auto");
-        mode.innerHTML = "auto";
-  
-        let circles = Array.from(document.querySelectorAll(".alive"));
-        circles.forEach((circle) => {
-          circle.removeEventListener(
-            "touchstart",
-            (e) => handleClick(e, "touchstart"),
-            true
-          );
-        });
-        PushPuchi(device);
-      } else {
-        modeButton.classList.remove("auto");
-        modeButton.classList.add("normal");
-        mode.innerHTML = "normal";
-  
-        let circles = Array.from(document.querySelectorAll(".alive"));
-        circles.forEach((circle) => {
-          if (modeButton.classList.contains("normal")) {
-            circle.removeEventListener("touchmove", circle.handleClickWrapper, true); // 以前に保存した関数を使用
-          } else {
-            circle.removeEventListener("touchstart", circle.handleClickWrapper, true); // 以前に保存した関数を使用
-          }
-        });
-        PushPuchi(device);
-      }
+    let circles = Array.from(document.querySelectorAll(".alive"));
+
+    if (modeButton.classList.contains("normal")) {
+      modeButton.classList.remove("normal");
+      modeButton.classList.add("auto");
+      mode.innerHTML = "auto";
+
+      circles.forEach((circle) => {
+        circle.removeEventListener(
+          eventTypes[0],
+          (e) => handleClick(e, eventTypes[0]),
+          true
+        );
+      });
     } else {
-      // タッチデバイスではない場合
-      if (modeButton.classList.contains("normal")) {
-        modeButton.classList.remove("normal");
-        modeButton.classList.add("auto");
-        mode.innerHTML = "auto";
-  
-        let circles = Array.from(document.querySelectorAll(".alive"));
-        circles.forEach((circle) => {
+      modeButton.classList.remove("auto");
+      modeButton.classList.add("normal");
+      mode.innerHTML = "normal";
+
+      circles.forEach((circle) => {
+        if (modeButton.classList.contains("normal")) {
           circle.removeEventListener(
-            "click",
-            (e) => handleClick(e, "click"),
+            eventTypes[1],
+            circle.handleClickWrapper,
             true
-          );
-        });
-        PushPuchi(device);
-      } else {
-        modeButton.classList.remove("auto");
-        modeButton.classList.add("normal");
-        mode.innerHTML = "normal";
-  
-        let circles = Array.from(document.querySelectorAll(".alive"));
-        circles.forEach((circle) => {
-          if (modeButton.classList.contains("normal")) {
-            circle.removeEventListener("mousemove", circle.handleClickWrapper, true); // 以前に保存した関数を使用
-          } else {
-            circle.removeEventListener("click", circle.handleClickWrapper, true); // 以前に保存した関数を使用
-          }
-        });
-        PushPuchi(device);
-      }
+          ); // 以前に保存した関数を使用
+        } else {
+          circle.removeEventListener(
+            eventTypes[0],
+            circle.handleClickWrapper,
+            true
+          ); // 以前に保存した関数を使用
+        }
+      });
     }
+    PushPuchi(device);
   });
 }
-
 export { PushPuchi, clickStyle };
