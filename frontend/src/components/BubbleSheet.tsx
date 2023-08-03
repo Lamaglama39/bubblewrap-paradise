@@ -16,6 +16,7 @@ export const BubbleSheet: React.FC = () => {
         right={0}
         bottom={0}
         bg="rgba(10, 10, 10, 0.1)"
+        pointerEvents="none"
       />
       <BubbleBox></BubbleBox>
     </Box>

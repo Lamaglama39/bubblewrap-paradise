@@ -1,5 +1,5 @@
 :root {
-  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -13,17 +13,6 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
-body {
-  font-family: 'Alumni Sans Collegiate One', sans-serif;
-font-family: 'Lato', sans-serif;
-font-family: 'Noto Sans JP', sans-serif;
-font-family: 'Noto Serif JP', serif;
-font-family: 'Pixelify Sans', sans-serif;
-font-family: 'Young Serif', serif;
-
-}
-
 
 * {
   margin: 0;
