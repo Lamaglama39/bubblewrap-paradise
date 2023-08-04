@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@chakra-ui/react";
+import InfiniteScroll from "react-infinite-scroller";
 import { BubbleBox } from "./BubbleBox";
+import useSound from "use-sound";
+import { rustleSound } from "../utils/SoundPath";
 
 export const BubbleSheet: React.FC = () => {
+  //表示するデータ
+  const [list, setList] = useState<JSX.Element[]>([]);
+
+  const rustlesSound: string =
+    rustleSound[Math.floor(Math.random() * rustleSound.length)];
+  const [play] = useSound(rustlesSound);
+
+  //項目を読み込むときのコールバック
+  const loadMore = () => {
+    setList([...list, <BubbleBox />]);
+    play();
+  };
+
+  //スクロール時の表示要素
+  const items = (
+    <ul>
+      {list.map((value, index) => (
+        <Box key={index}>{value}</Box>
+      ))}
+    </ul>
+  );
+
   return (
     <Box
       bgImage={"/img/background.png"}
@@ -18,7 +43,12 @@ export const BubbleSheet: React.FC = () => {
         bg="rgba(10, 10, 10, 0.1)"
         pointerEvents="none"
       />
-      <BubbleBox></BubbleBox>
+      <InfiniteScroll
+        loadMore={loadMore} //項目読み込み時のコールバック関数
+        hasMore={true} //読み込み判定
+      >
+        {items} {/* コンポーネント */}
+      </InfiniteScroll>
     </Box>
   );
 };
