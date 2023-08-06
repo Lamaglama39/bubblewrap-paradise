@@ -1,7 +1,11 @@
 import React from "react";
 import { Box, Button, Text } from "@chakra-ui/react";
 
-export const TopBar: React.FC = () => {
+interface TopBarProps {
+  count: number;
+}
+
+export const TopBar: React.FC<TopBarProps> = ({ count }) => {
   return (
     <Box
       bgImage={"/img/top.png"}
@@ -35,7 +39,7 @@ export const TopBar: React.FC = () => {
         Mode :
       </Button>
       <Text userSelect={"none"} fontSize={"2vh"} fontWeight={"bold"}>
-        COUNTER :
+        COUNTER :{count}
       </Text>
       <Button
         fontSize={"2vh"}

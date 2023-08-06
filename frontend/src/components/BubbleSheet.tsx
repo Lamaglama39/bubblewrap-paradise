@@ -5,7 +5,11 @@ import { BubbleBox } from "./BubbleBox";
 import useSound from "use-sound";
 import { rustleSound } from "../utils/SoundPath";
 
-export const BubbleSheet: React.FC = () => {
+interface BubbleSheetProps {
+  onIncrement: () => void;
+}
+
+export const BubbleSheet: React.FC<BubbleSheetProps> = ({ onIncrement }) => {
   //表示するデータ
   const [list, setList] = useState<JSX.Element[]>([]);
 
@@ -15,7 +19,10 @@ export const BubbleSheet: React.FC = () => {
 
   //項目を読み込むときのコールバック
   const loadMore = () => {
-    setList([...list, <BubbleBox />]);
+    setList([...list, <BubbleBox onIncrement={onIncrement} />]);
+    if (list.length > 3) {
+      list.shift();
+    }
     play();
   };
 
@@ -46,6 +53,7 @@ export const BubbleSheet: React.FC = () => {
       <InfiniteScroll
         loadMore={loadMore} //項目読み込み時のコールバック関数
         hasMore={true} //読み込み判定
+        // threshold={0.8} // スクロールの閾値を80%に設定
       >
         {items} {/* コンポーネント */}
       </InfiniteScroll>
