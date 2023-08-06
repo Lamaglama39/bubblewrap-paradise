@@ -4,10 +4,14 @@ import { BubbleImage } from "./BubbleImage";
 
 interface BubbleBoxProps {
   onIncrement: () => void;
+  clickMode: boolean;
 }
 
-export const BubbleBox: React.FC<BubbleBoxProps> = ({ onIncrement }) => {
-  const row: number = 3;
+export const BubbleBox: React.FC<BubbleBoxProps> = ({
+  onIncrement,
+  clickMode,
+}) => {
+  const row: number = 2;
   const column: number = 15;
 
   const fillROW: number[] = Array.from(Array(row).keys());
@@ -19,6 +23,7 @@ export const BubbleBox: React.FC<BubbleBoxProps> = ({ onIncrement }) => {
         <Box key={ColumnNum}>
           {fillROW.map((_, index) => (
             <BubbleImage
+              clickMode={clickMode}
               onIncrement={onIncrement}
               key={`${ColumnNum}-${index}`}
               index={index}

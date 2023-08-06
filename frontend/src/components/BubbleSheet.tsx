@@ -7,9 +7,13 @@ import { rustleSound } from "../utils/SoundPath";
 
 interface BubbleSheetProps {
   onIncrement: () => void;
+  clickMode: boolean;
 }
 
-export const BubbleSheet: React.FC<BubbleSheetProps> = ({ onIncrement }) => {
+export const BubbleSheet: React.FC<BubbleSheetProps> = ({
+  onIncrement,
+  clickMode,
+}) => {
   //表示するデータ
   const [list, setList] = useState<JSX.Element[]>([]);
 
@@ -19,7 +23,10 @@ export const BubbleSheet: React.FC<BubbleSheetProps> = ({ onIncrement }) => {
 
   //項目を読み込むときのコールバック
   const loadMore = () => {
-    setList([...list, <BubbleBox onIncrement={onIncrement} />]);
+    setList([
+      ...list,
+      <BubbleBox onIncrement={onIncrement} clickMode={clickMode} />,
+    ]);
     if (list.length > 3) {
       list.shift();
     }

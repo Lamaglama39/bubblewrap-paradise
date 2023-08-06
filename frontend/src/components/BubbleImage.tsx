@@ -6,11 +6,12 @@ import { bubbleSound } from "../utils/SoundPath";
 
 interface BubbleImageProps {
   index: number;
+  clickMode: boolean;
   onIncrement: () => void;
 }
 
 export const BubbleImage = React.memo<BubbleImageProps>(
-  ({ index, onIncrement }) => {
+  ({ index, clickMode, onIncrement }) => {
     const currentSound: string =
       bubbleSound[Math.floor(Math.random() * bubbleSound.length)];
 
@@ -20,14 +21,17 @@ export const BubbleImage = React.memo<BubbleImageProps>(
     );
     const [play] = useSound(currentSound);
 
-    const handleClick = () => {
+    const handleInteraction = () => {
       if (!isVisible) return;
       play();
       onIncrement();
-
       setCurrentImageUrl(bubbleBreak);
       setIsVisible(false);
     };
+
+    const eventProps = clickMode
+      ? { onClick: handleInteraction }
+      : { onMouseOver: handleInteraction };
 
     return (
       <Image
@@ -41,8 +45,7 @@ export const BubbleImage = React.memo<BubbleImageProps>(
         cursor={"pointer"}
         userSelect={"none"}
         border={"0.1vw darkgray solid"}
-        onClick={handleClick}
-        onMouseOver={handleClick}
+        {...eventProps}
       />
     );
   }

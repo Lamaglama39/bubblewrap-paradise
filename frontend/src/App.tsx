@@ -6,6 +6,11 @@ import { BubbleSheet } from "./components/BubbleSheet";
 
 export const App: React.FC = () => {
   const [count, setCount] = useState(0);
+  const [clickMode, setclickMode] = useState(true);
+
+  const toggleMode = () => {
+    setclickMode(!clickMode);
+  };
 
   const incrementCount = () => {
     setCount((prevCount) => prevCount + 1);
@@ -13,8 +18,8 @@ export const App: React.FC = () => {
   return (
     <ChakraProvider>
       <Box w={"100vw"} h={"100vh"}>
-        <TopBar count={count} />
-        <BubbleSheet onIncrement={incrementCount} />
+        <TopBar count={count} clickMode={clickMode} toggleMode={toggleMode} />
+        <BubbleSheet clickMode={clickMode} onIncrement={incrementCount} />
       </Box>
     </ChakraProvider>
   );

@@ -3,9 +3,16 @@ import { Box, Button, Text } from "@chakra-ui/react";
 
 interface TopBarProps {
   count: number;
+  clickMode: boolean;
+  toggleMode: () => void;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ count }) => {
+export const TopBar: React.FC<TopBarProps> = ({
+  count,
+  clickMode,
+  toggleMode,
+}) => {
+  const mode = clickMode ? "クリック" : "ホバー";
   return (
     <Box
       bgImage={"/img/top.png"}
@@ -35,8 +42,9 @@ export const TopBar: React.FC<TopBarProps> = ({ count }) => {
         h={"4vh"}
         border={"0.1vw solid black"}
         backgroundColor={"gray.400"}
+        onClick={toggleMode}
       >
-        Mode :
+        Mode :{mode}
       </Button>
       <Text userSelect={"none"} fontSize={"2vh"} fontWeight={"bold"}>
         COUNTER :{count}
