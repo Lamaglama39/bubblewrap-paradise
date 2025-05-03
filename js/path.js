@@ -1,5 +1,5 @@
 // 画像格納場所
-const imgPath = "../src/img/";
+const imgPath = "/src/img/";
 
 // プチプチ画像の配列
 const puchiImg = [
