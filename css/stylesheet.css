@@ -83,7 +83,7 @@ body::-webkit-scrollbar {
   top: 50%;
   left: 50%;
   padding: 3vw;
-  height: 25vh;
+  height: auto;
   width: 40vw;
   background-color: #fff;
   border-radius: var(--border-radius);
@@ -95,13 +95,32 @@ body::-webkit-scrollbar {
 .title {
   color: #e83015;
   margin-bottom: 2vw;
-  font-size: 2vh;
+  font-size: 2vw;
   padding-bottom: 1vw;
   border-bottom: #e83015 0.2vw solid;
 }
 
 .window p {
   font-size: 1.5vw;
+  line-height: 1.8;
+}
+
+.credit-label {
+  color: #e83015;
+  font-weight: bold;
+}
+
+.credit-name {
+  font-weight: bold;
+}
+
+.credit-link {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.credit-link:hover {
+  text-decoration: underline;
 }
 
 .close {
@@ -109,7 +128,7 @@ body::-webkit-scrollbar {
   color: #fff;
   background-color: #e83015;
   text-align: var(--text-align-center);
-  width: 3vw;
+  width: 2.5vw;
   height: 2.5vw;
   border-radius: 1vw;
   top: 1vw;
