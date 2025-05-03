@@ -13,7 +13,9 @@ export default defineConfig({
         manualChunks: undefined,
       },
     },
+    copyPublicDir: true,
   },
+  publicDir: 'src',
   resolve: {
     alias: {
       '@': resolve(__dirname, '.'),

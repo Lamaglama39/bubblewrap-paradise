@@ -1,5 +1,5 @@
 // プチプチ音一覧
-const soundPath = "/src/sound/";
+const soundPath = "/sound/";
 
 // クリック時の音
 let pop = [

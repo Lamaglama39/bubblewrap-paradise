@@ -40,7 +40,7 @@ function performActionOnElement(element) {
 
 // ぷちぷち画像変更
 function changeImage(circle) {
-  circle.src = "src/img/background.png";
+  circle.src = "/img/background.png";
   circle.classList.remove("alive");
   circle.classList.add("after");
 }
